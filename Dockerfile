@@ -34,7 +34,8 @@ COPY . /var/www/html/
 
 # Copy entrypoint script
 COPY docker-entrypoint.sh /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+RUN sed -i 's/\r$//' /usr/local/bin/docker-entrypoint.sh \
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
 
 # Set proper permissions for writable directories
 RUN chown -R www-data:www-data /var/www/html/application/cache \
